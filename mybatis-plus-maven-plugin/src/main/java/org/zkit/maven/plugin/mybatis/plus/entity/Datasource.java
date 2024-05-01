@@ -6,7 +6,5 @@ import lombok.Data;
 public class Datasource {
 
     private String url;
-    private String username;
-    private String password;
 
 }

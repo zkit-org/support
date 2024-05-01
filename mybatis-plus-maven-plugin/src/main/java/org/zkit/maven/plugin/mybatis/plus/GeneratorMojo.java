@@ -43,7 +43,9 @@ public class GeneratorMojo extends AbstractMojo {
     private void handleModule(GeneratorConfig config, Module module) {
         Log log = getLog();
         Datasource datasource = config.getDatasource();
-        FastAutoGenerator.create(datasource.getUrl(), datasource.getUsername(), datasource.getPassword())
+        String username = System.getenv("GEN_DB_USERNAME");
+        String password = System.getenv("GEN_DB_PASSWORD");
+        FastAutoGenerator.create(datasource.getUrl(), username, password)
                 .globalConfig(builder -> {
                     builder.author("generator") // 设置作者
                             // .enableSwagger() // 开启 swagger 模式
