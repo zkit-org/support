@@ -3,9 +3,7 @@ package org.zkit.support.boot.code;
 public enum ResultCode {
 
     SUCCESS(0),
-    FAIL(999),
-
-    ACCESS_LIMIT(4031);
+    FAIL(500);
 
     public final int code;
 

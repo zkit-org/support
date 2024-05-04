@@ -12,5 +12,6 @@
         <module>mybatis-plus-maven-plugin</module>
         <module>boot-dependencies</module>
         <module>boot</module>
+        <module>mybatis</module>
     </modules>
 </project>
