@@ -1,4 +1,4 @@
-package org.zkit.support.boot.configuration;
+package org.zkit.support.boot.configurer;
 
 import com.alibaba.fastjson2.support.config.FastJsonConfig;
 import com.alibaba.fastjson2.support.spring6.http.converter.FastJsonHttpMessageConverter;
@@ -21,7 +21,7 @@ import java.util.List;
  * Feign 客户端配置
  */
 @Configuration
-public class FeignConfiguration {
+public class FeignConfigurer {
 
     @Bean
     Logger.Level feignLoggerLevel() {

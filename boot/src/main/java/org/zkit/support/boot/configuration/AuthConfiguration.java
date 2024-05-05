@@ -1,22 +1,27 @@
 package org.zkit.support.boot.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.zkit.support.boot.auth.TokenInterceptor;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
-@Configuration
-public class AuthConfiguration implements WebMvcConfigurer {
+import java.util.List;
 
-    private TokenInterceptor tokenInterceptor;
+@Component
+@ConfigurationProperties(prefix = "auth")
+@Data
+public class AuthConfiguration {
 
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
-    }
+    private String su;
+    private String defaultRole;
+    private String initPassword;
+    private String jwtSecret;
+    private String transportPrivateKey;
+    private String aesKey;
+    private boolean debug;
+    private String emailCode;
+    private String otpCode;
+    private String resetOtpCode;
+    private List<String> commonAccess;
+    private List<String> publicAccess;
 
-    @Autowired
-    public void setTokenInterceptor(TokenInterceptor tokenInterceptor) {
-        this.tokenInterceptor = tokenInterceptor;
-    }
 }

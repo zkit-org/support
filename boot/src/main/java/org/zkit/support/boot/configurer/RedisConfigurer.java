@@ -1,4 +1,4 @@
-package org.zkit.support.boot.configuration;
+package org.zkit.support.boot.configurer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.EnableCaching;
@@ -13,7 +13,7 @@ import org.zkit.support.boot.fastjson.FastJsonRedisSerializer;
 @Configuration
 @Slf4j
 @EnableCaching
-public class RedisConfiguration {
+public class RedisConfigurer {
 
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory factory) {

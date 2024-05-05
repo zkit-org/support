@@ -1,4 +1,4 @@
-package org.zkit.support.boot.configuration;
+package org.zkit.support.boot.configurer;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import java.util.Locale;
 
 @Configuration
-public class I18nConfiguration implements WebMvcConfigurer {
+public class I18nConfigurer implements WebMvcConfigurer {
 
     @Bean
     public LocaleResolver localeResolver(){
