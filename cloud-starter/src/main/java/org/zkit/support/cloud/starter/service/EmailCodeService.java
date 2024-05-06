@@ -4,7 +4,9 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import org.zkit.support.cloud.starter.code.MailCode;
+import org.zkit.support.cloud.starter.code.PublicCode;
 import org.zkit.support.cloud.starter.configuration.AuthConfiguration;
 import org.zkit.support.cloud.starter.entity.EmailCode;
 import org.zkit.support.cloud.starter.entity.EmailData;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Service
+@Component
 @Slf4j
 public class EmailCodeService {
 
@@ -43,7 +45,7 @@ public class EmailCodeService {
             Long lastTime = (Long)redisTemplate.opsForValue().get(timeKey);
             long offset = now - code.getCreatedAt().getTime();
             if (lastTime != null && now - lastTime < 60 * 1000)
-                throw new ResultException(1, MessageUtils.get("public.throttle"));
+                throw new ResultException(PublicCode.THROTTLE.code, MessageUtils.get(PublicCode.THROTTLE.key));
             if (offset < 60 * 1000)
                 code = this.newCode(email, action);
         }else{
@@ -66,7 +68,7 @@ public class EmailCodeService {
         if(!sent) {
             redisTemplate.delete(codeKey);
             redisTemplate.delete(timeKey);
-            throw new ResultException(2, MessageUtils.get("mail.fail"));
+            throw new ResultException(MailCode.FAIL.code, MessageUtils.get(MailCode.FAIL.key));
         }
     }
 

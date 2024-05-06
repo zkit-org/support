@@ -1,7 +1,7 @@
 package org.zkit.support.cloud.starter.entity;
 
 import lombok.Data;
-import org.zkit.support.cloud.starter.code.ResultCode;
+import org.zkit.support.cloud.starter.code.PublicCode;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,7 +18,7 @@ public class Result<T> implements Serializable {
     private T data;
 
     public boolean isSuccess() {
-        return code == ResultCode.SUCCESS.code;
+        return code == PublicCode.SUCCESS.code;
     }
 
     public static <T> Result<T> success(T data) {
@@ -36,7 +36,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> result(int code, T data, String message){
         Result<T> result = new Result<T>();
         result.setData(data);
-        result.setSuccess(code == ResultCode.SUCCESS.code);
+        result.setSuccess(code == PublicCode.SUCCESS.code);
         result.setCode(code);
         result.setMessage(message);
         return result;
@@ -56,11 +56,11 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> error(String message, T data) {
-        return error(ResultCode.FAIL.code, message, data);
+        return error(PublicCode.FAIL.code, message, data);
     }
 
     public static <T> Result<T> error(T data) {
-        return error(ResultCode.FAIL.code, "error", data);
+        return error(PublicCode.FAIL.code, "error", data);
     }
 
 }

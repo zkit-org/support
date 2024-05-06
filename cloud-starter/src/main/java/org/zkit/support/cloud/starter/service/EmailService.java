@@ -9,14 +9,14 @@ import com.aliyuncs.profile.IClientProfile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.zkit.support.cloud.starter.configuration.AliDMConfiguration;
 import org.zkit.support.cloud.starter.entity.EmailData;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 
-@Service
+@Component
 @Slf4j
 public class EmailService {
 
