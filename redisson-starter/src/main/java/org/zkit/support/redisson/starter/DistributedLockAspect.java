@@ -1,5 +1,6 @@
 package org.zkit.support.redisson.starter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -34,16 +35,22 @@ public class DistributedLockAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
-        String lockKey = evaluateExpression(distributedLock.value(), joinPoint);
+        String lockValue = distributedLock.value();
+        String key = distributedLock.key();
+        String lockKey = StringUtils.isNotEmpty(key) ? evaluateExpression(key, joinPoint) : key;
         long waitTime = distributedLock.waitTime();
         long leaseTime = distributedLock.leaseTime();
         TimeUnit timeUnit = distributedLock.timeUnit();
 
-        RLock lock = redissonClient.getLock(lockKey);
+        String redisKey = "lock:"+lockValue;
+        if (StringUtils.isNotEmpty(lockKey)) {
+            redisKey = lockValue + ":" + lockKey;
+        }
+
+        RLock lock = redissonClient.getLock(redisKey);
         try {
             if (lock.tryLock(waitTime, leaseTime, timeUnit)) {
                 try {
-                    // 执行业务方法
                     return joinPoint.proceed();
                 } finally {
                     lock.unlock();
