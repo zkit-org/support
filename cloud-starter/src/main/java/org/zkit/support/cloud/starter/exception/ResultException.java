@@ -19,4 +19,7 @@ public class ResultException extends RuntimeException {
     public static ResultException internal() {
         return new ResultException(500, "Internal Server Error");
     }
+    public static ResultException busy() {
+        return new ResultException(500, "Service is busy");
+    }
 }

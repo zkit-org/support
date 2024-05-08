@@ -7,6 +7,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,6 +15,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.zkit.support.cloud.starter.exception.ResultException;
 import org.zkit.support.throttler.starter.annotation.Throttler;
 
 import java.lang.reflect.Method;
@@ -23,6 +25,7 @@ import java.util.Objects;
 
 @Aspect
 @Component
+@Slf4j
 public class ThrottlerAspect {
 
     private static void initFlowRule(String resourceName, int limitCount) {
@@ -43,7 +46,7 @@ public class ThrottlerAspect {
     public void rateLimit() {}
 
     @Around("rateLimit()")
-    public Object around(ProceedingJoinPoint joinPoint) {
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         //1、获取当前的调用方法
         Method currentMethod = getCurrentMethod(joinPoint);
         if (Objects.isNull(currentMethod)) {
@@ -61,17 +64,12 @@ public class ThrottlerAspect {
         Object result = null;
         try {
             entry = SphU.entry(resourceName);
-            try {
-                result = joinPoint.proceed();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
+            result = joinPoint.proceed();
         } catch (BlockException ex) {
-            //  资源访问阻止，被限流或被降级
-            //  在此处进行相应的处理操作
-            System.out.println("blocked");
-        } catch (Exception e) {
+            throw ResultException.busy();
+        } catch (Throwable e) {
             Tracer.traceEntry(e, entry);
+            throw e;
         } finally {
             if (entry != null) {
                 entry.exit();

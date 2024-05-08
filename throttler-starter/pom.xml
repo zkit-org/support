@@ -14,6 +14,12 @@
     <dependencies>
         <!--guava-->
         <dependency>
+            <groupId>org.zkit.support</groupId>
+            <artifactId>cloud-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>33.2.0-jre</version>
