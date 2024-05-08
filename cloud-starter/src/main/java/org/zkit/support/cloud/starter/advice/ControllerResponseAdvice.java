@@ -26,8 +26,6 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        String path = request.getURI().getPath();
-        if(path.startsWith("/inner")) return body;
         if(body instanceof Result){
             return body;
         }
@@ -45,7 +43,6 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
     @ResponseBody
     public Result<Object> exceptionHandler(Exception e){
         log.error(e.toString());
-        e.printStackTrace();
         return Result.error("Server error");
     }
 }
