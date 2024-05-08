@@ -15,4 +15,8 @@ public class ResultException extends RuntimeException {
         this.code = code;
         this.message = message;
     }
+
+    public static ResultException internal() {
+        return new ResultException(500, "Internal Server Error");
+    }
 }
