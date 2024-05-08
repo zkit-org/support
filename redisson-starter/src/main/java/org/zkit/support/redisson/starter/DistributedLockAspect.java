@@ -56,11 +56,11 @@ public class DistributedLockAspect {
                     lock.unlock();
                 }
             } else {
-                throw new RuntimeException("获取锁失败");
+                throw new RuntimeException("Failed to acquire lock");
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new RuntimeException("获取锁过程中被中断", e);
+            throw new RuntimeException("The process of acquiring the lock was interrupted", e);
         }
     }
 

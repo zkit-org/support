@@ -14,5 +14,6 @@
         <module>mybatis-plus-maven-plugin</module>
         <module>mybatis-starter</module>
         <module>redisson-starter</module>
+        <module>throttler-starter</module>
     </modules>
 </project>
