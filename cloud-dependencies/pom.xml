@@ -187,6 +187,12 @@
             <artifactId>netty-all</artifactId>
             <version>4.1.109.Final</version>
         </dependency>
+        <!-- 用于SecureKey生成 -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.17.0</version>
+        </dependency>
         <!-- Spring Boot - End -->
 
         <!-- Spring Cloud - Start -->
