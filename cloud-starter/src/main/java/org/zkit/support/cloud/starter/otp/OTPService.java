@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base32;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.zkit.support.cloud.starter.configuration.AuthConfiguration;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -17,6 +18,7 @@ import java.security.SecureRandom;
 public class OTPService {
 
     private OTPConfiguration configuration;
+    private AuthConfiguration authConfiguration;
 
     /**
      * 生成一个SecretKey，外部绑定到用户
@@ -68,6 +70,9 @@ public class OTPService {
      * @return 匹配成功与否
      */
     public boolean check(String secret, String code) {
+        if(authConfiguration.isDebug()) {
+            return authConfiguration.getOtpCode().equals(code);
+        }
         Base32 codec = new Base32();
         byte[] decodedKey = codec.decode(secret);
         // convert unix msec time into a 30 second "window"
@@ -76,7 +81,7 @@ public class OTPService {
         long t = (timeMsec / 1000L) / configuration.getSecondPerSize();
         // Window is used to check codes generated in the near past.
         // You can use this value to tune how far you're willing to go.
-        for (int i = -configuration.getWindowSize(); i <= configuration.getWindowSize(); ++i) {
+        for (int i = 0; i <= configuration.getWindowSize(); ++i) {
             int hash;
             try {
                 hash = verify(decodedKey, t + i);
@@ -123,6 +128,11 @@ public class OTPService {
     private byte[] getSeed() {
         String str = configuration.getIssuer() + System.currentTimeMillis() + configuration.getIssuer();
         return str.getBytes(StandardCharsets.UTF_8);
+    }
+
+    @Autowired
+    public void setAuthConfiguration(AuthConfiguration authConfiguration) {
+        this.authConfiguration = authConfiguration;
     }
 
     @Autowired
