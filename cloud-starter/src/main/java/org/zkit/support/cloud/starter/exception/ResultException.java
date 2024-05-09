@@ -1,5 +1,6 @@
 package org.zkit.support.cloud.starter.exception;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,5 +22,9 @@ public class ResultException extends RuntimeException {
     }
     public static ResultException busy() {
         return new ResultException(500, "Service is busy");
+    }
+
+    public static ResultException unauthorized() {
+        return new ResultException(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
 }

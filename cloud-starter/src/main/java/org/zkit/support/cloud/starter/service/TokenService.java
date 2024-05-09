@@ -1,5 +1,7 @@
 package org.zkit.support.cloud.starter.service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -29,6 +31,34 @@ public class TokenService {
                 .signWith(key)
                 .expiration(new Date(now.getTime()+data.getExpiresIn()));
         return  jwtBuilder.compact();
+    }
+
+    public boolean checked(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(configuration.getJwtSecret().getBytes(StandardCharsets.UTF_8));
+        try{
+            Jwts.parser()
+                    .verifyWith(key)
+                    .build()
+                    .parseSignedClaims(token);
+            return true;
+        }catch (Exception e){
+            log.error("parse token error", e);
+        }
+        return false;
+    }
+
+    public Jws<Claims> parse(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(configuration.getJwtSecret().getBytes(StandardCharsets.UTF_8));
+        Jws<Claims> jws = null;
+        try{
+            jws = Jwts.parser()
+                    .verifyWith(key)
+                    .build()
+                    .parseSignedClaims(token);
+        }catch (Exception e){
+            log.error("parse token error", e);
+        }
+        return jws;
     }
 
     @Autowired

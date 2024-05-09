@@ -43,6 +43,7 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
     @ResponseBody
     public Result<Object> exceptionHandler(Exception e){
         log.error(e.toString());
+        e.printStackTrace();
         return Result.error("Server error");
     }
 }
