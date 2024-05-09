@@ -23,5 +23,6 @@ public class AuthConfiguration {
     private String resetOtpCode;
     private List<String> commonAccess;
     private List<String> publicAccess;
+    private Long expiresIn;
 
 }

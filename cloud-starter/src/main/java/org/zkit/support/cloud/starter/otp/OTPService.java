@@ -67,7 +67,7 @@ public class OTPService {
      * @param code   用户输入的code
      * @return 匹配成功与否
      */
-    public boolean check(String secret, int code) {
+    public boolean check(String secret, String code) {
         Base32 codec = new Base32();
         byte[] decodedKey = codec.decode(secret);
         // convert unix msec time into a 30 second "window"
@@ -88,7 +88,7 @@ public class OTPService {
                 // return false;
             }
             log.error("input code=" + code + "; count hash=" + hash);
-            if (code == hash) { // addZero(hash)
+            if (Integer.parseInt(code) == hash) { // addZero(hash)
                 return true;
             }
         }
