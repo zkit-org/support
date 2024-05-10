@@ -9,11 +9,14 @@
     <name>Easy Kit Support</name>
 
     <modules>
+        <module>boot-dependencies</module>
+        <module>boot-starter</module>
         <module>cloud-dependencies</module>
         <module>cloud-starter</module>
         <module>mybatis-plus-maven-plugin</module>
         <module>mybatis-starter</module>
         <module>redisson-starter</module>
         <module>throttler-starter</module>
+        <module>openapi-starter</module>
     </modules>
 </project>

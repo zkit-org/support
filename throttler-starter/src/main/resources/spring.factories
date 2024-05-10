@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    org.zkit.support.throttler.starter.aspect.ThrottlerAspect
+    aspect.org.zkit.support.starter.throttler.ThrottlerAspect
