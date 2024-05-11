@@ -48,11 +48,17 @@ public class GeneratorMojo extends AbstractMojo {
         FastAutoGenerator.create(datasource.getUrl(), username, password)
                 .globalConfig(builder -> {
                     builder.author("generator") // 设置作者
-                            // .enableSwagger() // 开启 swagger 模式
+                            .enableSpringdoc()
                             .outputDir("src/main/java") // 指定输出目录
                             .disableOpenDir();
                 })
                     .dataSourceConfig(builder -> builder.typeConvertHandler((globalConfig, typeRegistry, metaInfo) -> {
+                        if(metaInfo.getTypeName().equals("TINYINT") && metaInfo.getLength() == 1) {
+                            return DbColumnType.BOOLEAN;
+                        }
+                        if(metaInfo.getTypeName().equals("DATETIME")) {
+                            return DbColumnType.DATE;
+                        }
                         if(metaInfo.getTypeName().equals("JSON")) {
                             return DbColumnType.OBJECT;
                         }
@@ -65,9 +71,9 @@ public class GeneratorMojo extends AbstractMojo {
                     builder.entity("entity.dto");
                 })
                 .strategyConfig(builder -> {
-                    builder.entityBuilder().enableLombok().enableFileOverride();;
+                    builder.entityBuilder().enableLombok().enableFileOverride();
                     builder.serviceBuilder().formatServiceFileName("%sService");
-                    builder.controllerBuilder();
+                    builder.controllerBuilder().enableRestStyle();
                     builder.mapperBuilder()
                             .enableBaseColumnList()
                             .enableBaseResultMap();
