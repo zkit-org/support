@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.lang.NonNull;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.zkit.support.starter.boot.auth.CurrentUserArgumentResolver;
+import org.zkit.support.starter.boot.auth.TokenInterceptor;
 import org.zkit.support.starter.boot.service.SessionService;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 public class WebMvcConfigurer implements org.springframework.web.servlet.config.annotation.WebMvcConfigurer {
 
     private SessionService sessionService;
+    private TokenInterceptor tokenInterceptor;
 
     @Override
     public void configureMessageConverters(@NonNull List<HttpMessageConverter<?>> converters) {
@@ -29,9 +32,20 @@ public class WebMvcConfigurer implements org.springframework.web.servlet.config.
         argumentResolvers.add(new CurrentUserArgumentResolver(sessionService));
     }
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
+    }
+
     @Lazy
     @Autowired
     public void setSessionService(SessionService sessionService) {
         this.sessionService = sessionService;
+    }
+
+    @Lazy
+    @Autowired
+    public void setTokenInterceptor(TokenInterceptor tokenInterceptor) {
+        this.tokenInterceptor = tokenInterceptor;
     }
 }
