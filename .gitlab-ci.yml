@@ -13,7 +13,7 @@ install:
         - cd cloud-dependencies
         - mvn install
         - cd ..
-        - mvn install -X
+        - mvn install
 
 # deploy:
 #     stage: deploy
