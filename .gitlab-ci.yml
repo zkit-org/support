@@ -1,0 +1,30 @@
+stages:
+    - install
+    # - deploy
+
+install:
+    stage: install
+    tags:
+        - dev
+    script:
+        - cd boot-dependencies
+        - mvn install
+        - cd ..
+        - cd cloud-dependencies
+        - mvn install
+        - cd ..
+        - mvn install
+
+# deploy:
+#     stage: deploy
+#     only:
+#         variables:
+#             - $SERVICE == "main"
+#             - $SERVICE == "admin"
+#             - $SERVICE == "i18n"
+#     tags:
+#         - dev
+#     script:
+#         - cd /opt/clover/test/web-$SERVICE
+#         - docker-compose down
+#         - docker-compose up -d
