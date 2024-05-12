@@ -17,9 +17,7 @@ public class OpenAPIConfigurer {
         Info info = new Info().title("SpringDoc API Test")
                 .description("SpringDoc Simple Application <b>Test</b>")
                 .version("0.0.1");
-        List<Server> servers = new ArrayList<>();
-        servers.add(new Server().url("http://localhost:3000/api/account"));
-        return new OpenAPI().info(info).servers(servers);
+        return new OpenAPI().info(info);
 
     }
 
