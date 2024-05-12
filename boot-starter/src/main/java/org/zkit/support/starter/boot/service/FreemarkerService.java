@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.StringWriter;
 
-@Component
 @Slf4j
+@Component
 public class FreemarkerService {
 
     public String render(String template, Object data) {

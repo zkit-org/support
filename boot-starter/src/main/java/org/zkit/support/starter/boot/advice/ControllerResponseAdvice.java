@@ -76,10 +76,11 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> exceptionHandler(Exception e){
         log.error(e.toString());
         e.printStackTrace();
-        return Result.error("Server error");
+        return Result.error("Server error", null);
     }
 
     @Autowired

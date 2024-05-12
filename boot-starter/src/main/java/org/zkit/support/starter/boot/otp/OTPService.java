@@ -13,8 +13,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-@Component
 @Slf4j
+@Component
 public class OTPService {
 
     private OTPConfiguration configuration;

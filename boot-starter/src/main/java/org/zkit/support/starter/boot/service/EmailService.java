@@ -16,8 +16,8 @@ import org.zkit.support.starter.boot.entity.EmailData;
 import java.text.MessageFormat;
 import java.util.Locale;
 
-@Component
 @Slf4j
+@Component
 public class EmailService {
 
     private AliDMConfiguration configuration;

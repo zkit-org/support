@@ -13,6 +13,7 @@
         <module>boot-starter</module>
         <module>cloud-dependencies</module>
         <module>cloud-starter</module>
+        <module>gateway-starter</module>
         <module>mybatis-plus-maven-plugin</module>
         <module>mybatis-starter</module>
         <module>redisson-starter</module>

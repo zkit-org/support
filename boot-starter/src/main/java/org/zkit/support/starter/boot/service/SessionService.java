@@ -13,8 +13,8 @@ import org.zkit.support.starter.boot.utils.MD5Utils;
 
 import java.util.concurrent.TimeUnit;
 
-@Component
 @Slf4j
+@Component
 public class SessionService {
 
     @Resource
@@ -26,6 +26,17 @@ public class SessionService {
         String sessionKey = "session:user:" + user.getUsername();
         redisTemplate.opsForValue().set(sessionKey, user, user.getExpiresIn(), TimeUnit.MILLISECONDS);
         redisTemplate.opsForValue().set(tokenKey, user.getJwtToken(), user.getExpiresIn(), TimeUnit.MILLISECONDS);
+    }
+
+    public void logout(String token) {
+        SessionUser user = this.get(token);
+        if(user == null) {
+            return;
+        }
+        String tokenKey = "session:token:" + token;
+        String sessionKey = "session:user:" + user.getUsername();
+        redisTemplate.delete(tokenKey);
+        redisTemplate.delete(sessionKey);
     }
 
     public SessionUser get(String token) {

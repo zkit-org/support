@@ -10,4 +10,12 @@
     <artifactId>cloud-starter</artifactId>
     <packaging>jar</packaging>
     <name>Easy Kit Support - Cloud Starter</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+    </dependencies>
 </project>

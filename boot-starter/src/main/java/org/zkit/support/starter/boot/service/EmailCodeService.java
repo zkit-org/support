@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Component
 @Slf4j
+@Component
 public class EmailCodeService {
 
     @Resource
