@@ -100,9 +100,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     }
 
     private void setUser(SessionUser user, @NonNull Object handler) {
-        if(handler instanceof HandlerMethod && hasCurrentUserAnnotation((HandlerMethod) handler)){
-            SessionHolder.set(user);
-        }
+        SessionHolder.set(user);
     }
 
     private boolean hasCurrentUserAnnotation(HandlerMethod handlerMethod){

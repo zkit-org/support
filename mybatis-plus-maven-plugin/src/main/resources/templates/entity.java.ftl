@@ -1,5 +1,7 @@
 package ${package.Entity};
 
+import com.baomidou.mybatisplus.extension.handlers.Fastjson2TypeHandler;
+import com.baomidou.mybatisplus.annotation.TableField;
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
@@ -96,6 +98,9 @@ public class ${entity} {
     <#-- 逻辑删除注解 -->
     <#if field.logicDeleteField>
     @TableLogic
+    </#if>
+    <#if field.propertyType == "Object">
+    @TableField(typeHandler = Fastjson2TypeHandler.class)
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>
