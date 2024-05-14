@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jws;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.zkit.support.starter.boot.entity.SessionUser;
@@ -19,6 +18,7 @@ public class SessionService {
 
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
+    @Resource
     private TokenService tokenService;
 
     public void login(SessionUser user) {
@@ -53,8 +53,4 @@ public class SessionService {
         return (SessionUser) redisTemplate.opsForValue().get(sessionKey);
     }
 
-    @Autowired
-    public void setTokenService(TokenService tokenService) {
-        this.tokenService = tokenService;
-    }
 }

@@ -5,8 +5,8 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.zkit.support.starter.boot.configuration.AuthConfiguration;
 import org.zkit.support.starter.boot.entity.CreateTokenData;
@@ -19,6 +19,7 @@ import java.util.Date;
 @Component
 public class TokenService {
 
+    @Resource
     private AuthConfiguration configuration;
 
     public String create(CreateTokenData data) {
@@ -61,8 +62,4 @@ public class TokenService {
         return jws;
     }
 
-    @Autowired
-    public void setConfiguration(AuthConfiguration configuration) {
-        this.configuration = configuration;
-    }
 }

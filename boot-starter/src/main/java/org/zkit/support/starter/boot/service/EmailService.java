@@ -6,8 +6,8 @@ import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailResponse;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import org.zkit.support.starter.boot.configuration.AliDMConfiguration;
@@ -20,7 +20,9 @@ import java.util.Locale;
 @Component
 public class EmailService {
 
+    @Resource
     private AliDMConfiguration configuration;
+    @Resource
     private FreemarkerService freemarkerService;
 
     public boolean singleSendMail(EmailData data){
@@ -70,13 +72,4 @@ public class EmailService {
         return true;
     }
 
-    @Autowired
-    public void setConfiguration(AliDMConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
-    @Autowired
-    public void setFreemarkerService(FreemarkerService freemarkerService) {
-        this.freemarkerService = freemarkerService;
-    }
 }

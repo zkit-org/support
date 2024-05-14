@@ -1,9 +1,9 @@
 package org.zkit.support.starter.boot.auth;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,9 @@ import java.util.Objects;
 @Slf4j
 public class TokenInterceptor implements HandlerInterceptor {
 
+    @Resource
     private SessionService sessionService;
+    @Resource
     private AuthConfiguration configuration;
     private final AntPathMatcher matcher = new AntPathMatcher();
 
@@ -113,13 +115,4 @@ public class TokenInterceptor implements HandlerInterceptor {
         SessionHolder.remove();
     }
 
-    @Autowired
-    public void setSessionService(SessionService sessionService) {
-        this.sessionService = sessionService;
-    }
-
-    @Autowired
-    public void setConfiguration(AuthConfiguration configuration) {
-        this.configuration = configuration;
-    }
 }

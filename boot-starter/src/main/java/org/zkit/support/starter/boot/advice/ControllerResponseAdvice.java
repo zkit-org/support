@@ -2,8 +2,8 @@ package org.zkit.support.starter.boot.advice;
 
 import io.micrometer.common.lang.NonNullApi;
 import io.micrometer.common.lang.Nullable;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 @NonNullApi
 public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
 
+    @Resource
     private ResponseAdviceConfiguration configuration;
     private final AntPathMatcher matcher = new AntPathMatcher();
 
@@ -83,8 +84,4 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
         return Result.error("Server error", null);
     }
 
-    @Autowired
-    public void setConfiguration(ResponseAdviceConfiguration configuration) {
-        this.configuration = configuration;
-    }
 }

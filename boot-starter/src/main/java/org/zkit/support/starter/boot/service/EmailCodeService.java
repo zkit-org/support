@@ -2,7 +2,6 @@ package org.zkit.support.starter.boot.service;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.zkit.support.starter.boot.code.MailCode;
@@ -24,7 +23,9 @@ public class EmailCodeService {
 
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
+    @Resource
     private AuthConfiguration configuration;
+    @Resource
     private EmailService emailService;
 
     private EmailCode newCode(String email, String action) {
@@ -78,13 +79,4 @@ public class EmailCodeService {
         return !(emailCode == null || !emailCode.getCode().equals(code));
     }
 
-    @Autowired
-    public void setConfiguration(AuthConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
-    @Autowired
-    public void setEmailService(EmailService emailService) {
-        this.emailService = emailService;
-    }
 }

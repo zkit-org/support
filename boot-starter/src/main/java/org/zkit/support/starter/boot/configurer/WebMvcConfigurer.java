@@ -1,7 +1,7 @@
 package org.zkit.support.starter.boot.configurer;
 
 import com.alibaba.fastjson2.support.spring6.http.converter.FastJsonHttpMessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -18,7 +18,9 @@ import java.util.List;
 @Configuration
 public class WebMvcConfigurer implements org.springframework.web.servlet.config.annotation.WebMvcConfigurer {
 
+    @Resource
     private SessionService sessionService;
+    @Resource
     private TokenInterceptor tokenInterceptor;
 
     @Override
@@ -47,15 +49,4 @@ public class WebMvcConfigurer implements org.springframework.web.servlet.config.
         registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
     }
 
-    @Lazy
-    @Autowired
-    public void setSessionService(SessionService sessionService) {
-        this.sessionService = sessionService;
-    }
-
-    @Lazy
-    @Autowired
-    public void setTokenInterceptor(TokenInterceptor tokenInterceptor) {
-        this.tokenInterceptor = tokenInterceptor;
-    }
 }

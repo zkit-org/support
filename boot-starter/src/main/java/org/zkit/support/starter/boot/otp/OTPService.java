@@ -1,8 +1,8 @@
 package org.zkit.support.starter.boot.otp;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base32;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.zkit.support.starter.boot.configuration.AuthConfiguration;
 
@@ -17,7 +17,9 @@ import java.security.SecureRandom;
 @Component
 public class OTPService {
 
+    @Resource
     private OTPConfiguration configuration;
+    @Resource
     private AuthConfiguration authConfiguration;
 
     /**
@@ -130,13 +132,4 @@ public class OTPService {
         return str.getBytes(StandardCharsets.UTF_8);
     }
 
-    @Autowired
-    public void setAuthConfiguration(AuthConfiguration authConfiguration) {
-        this.authConfiguration = authConfiguration;
-    }
-
-    @Autowired
-    public void setConfiguration(OTPConfiguration configuration) {
-        this.configuration = configuration;
-    }
 }

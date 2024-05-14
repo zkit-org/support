@@ -1,5 +1,6 @@
 package org.zkit.support.starter.redisson;
 
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -8,7 +9,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.expression.EvaluationContext;
@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class DistributedLockAspect {
 
+    @Resource
     private RedissonClient redissonClient;
     private final SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
     private final DefaultParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
@@ -77,8 +78,4 @@ public class DistributedLockAspect {
         return exp.getValue(context, String.class);
     }
 
-    @Autowired
-    public void setRedissonClient(RedissonClient redissonClient) {
-        this.redissonClient = redissonClient;
-    }
 }
