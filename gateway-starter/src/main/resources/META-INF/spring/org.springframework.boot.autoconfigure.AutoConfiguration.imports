@@ -1,1 +1,2 @@
 org.zkit.support.starter.gateway.configurer.SpringDocConfigurer
+org.zkit.support.starter.gateway.filter.TraceIdResponseHeaderFilter

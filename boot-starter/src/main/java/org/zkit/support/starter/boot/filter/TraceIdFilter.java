@@ -5,22 +5,26 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
-import org.apache.skywalking.apm.toolkit.trace.TraceContext;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
 @Component
-public class TraceResponseFilter extends OncePerRequestFilter {
+@Slf4j
+public class TraceIdFilter extends OncePerRequestFilter {
+
     @Override
     protected void doFilterInternal(
-            @NonNull HttpServletRequest httpServletRequest,
-            HttpServletResponse httpServletResponse,
+            HttpServletRequest request,
+            @NonNull  HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        httpServletResponse.addHeader("tid", TraceContext.traceId().replaceAll("TID:", "").trim());
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+        String traceId = request.getHeader("x-trace-id");
+        MDC.put("traceId", traceId);
+        filterChain.doFilter(request, response);
     }
 
 }

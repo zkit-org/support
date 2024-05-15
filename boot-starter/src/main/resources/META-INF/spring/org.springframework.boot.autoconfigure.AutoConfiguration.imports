@@ -6,7 +6,8 @@ org.zkit.support.starter.boot.configuration.ResponseAdviceConfiguration
 org.zkit.support.starter.boot.configurer.I18nConfigurer
 org.zkit.support.starter.boot.configurer.RedisConfigurer
 org.zkit.support.starter.boot.configurer.WebMvcConfigurer
-org.zkit.support.starter.boot.filter.TraceResponseFilter
+org.zkit.support.starter.boot.filter.TraceIdFilter
+org.zkit.support.starter.boot.filter.ApmHttpInfoFilter
 org.zkit.support.starter.boot.otp.OTPConfiguration
 org.zkit.support.starter.boot.otp.OTPService
 org.zkit.support.starter.boot.service.EmailCodeService
