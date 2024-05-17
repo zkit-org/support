@@ -3,6 +3,7 @@ package org.zkit.support.starter.gateway.filter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.apache.skywalking.apm.toolkit.webflux.WebFluxSkyWalkingOperators;
+import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -24,6 +25,7 @@ public class TraceIdResponseHeaderFilter implements GlobalFilter, Ordered {
                 .build();
         exchange.mutate().request(request).build();
         exchange.getResponse().getHeaders().set("x-trace-id", traceId);
+        MDC.put("traceId", traceId);
         return chain.filter(exchange);
     }
 

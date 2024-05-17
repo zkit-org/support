@@ -24,6 +24,7 @@ public class TraceIdFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         String traceId = request.getHeader("x-trace-id");
         MDC.put("traceId", traceId);
+        log.info("traceId: {}", traceId);
         filterChain.doFilter(request, response);
     }
 
