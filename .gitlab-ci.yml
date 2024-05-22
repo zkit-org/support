@@ -1,8 +1,10 @@
 stages:
     - deploy
 
-deploy:
+deploy_maven:
     stage: deploy
+    only:
+        - main
     tags:
         - dev
     script:
