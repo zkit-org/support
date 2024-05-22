@@ -6,10 +6,4 @@ install:
     tags:
         - dev
     script:
-        - cd boot-dependencies
-        - mvn install
-        - cd ..
-        - cd cloud-dependencies
-        - mvn install
-        - cd ..
-        - mvn install
+        - mvn clean deploy -s settings.xml

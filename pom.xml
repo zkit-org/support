@@ -20,4 +20,21 @@
         <module>throttler-starter</module>
         <module>openapi-starter</module>
     </modules>
+
+    <repositories>
+        <repository>
+            <id>gitlab-maven</id>
+            <url>https://git.zkit.org/api/v4/projects/115/packages/maven</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>gitlab-maven</id>
+            <url>https://git.zkit.org/api/v4/projects/115/packages/maven</url>
+        </repository>
+        <snapshotRepository>
+            <id>gitlab-maven</id>
+            <url>https://git.zkit.org/api/v4/projects/115/packages/maven</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

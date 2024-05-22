@@ -217,16 +217,20 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>gitlab-maven</id>
+            <url>https://git.zkit.org/api/v4/projects/115/packages/maven</url>
+        </repository>
+    </repositories>
     <distributionManagement>
         <repository>
-            <id>releases</id>
-            <name>nexus-releases</name>
-            <url>https://maven.zkit.org/repository/maven-releases/</url>
+            <id>gitlab-maven</id>
+            <url>https://git.zkit.org/api/v4/projects/115/packages/maven</url>
         </repository>
         <snapshotRepository>
-            <id>snapshot</id>
-            <name>nexus-snapshot</name>
-            <url>https://maven.zkit.org/repository/maven-snapshots/</url>
+            <id>gitlab-maven</id>
+            <url>https://git.zkit.org/api/v4/projects/115/packages/maven</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
