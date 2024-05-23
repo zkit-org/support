@@ -1,8 +1,9 @@
 stages:
+    - prepare
     - deploy
 
-deploy_boot:
-    stage: deploy
+dependencies_boot:
+    stage: prepare
     only:
         - main
     tags:
@@ -11,8 +12,8 @@ deploy_boot:
         - cd boot-dependencies
         - mvn clean deploy -s ../settings.xml
 
-deploy_cloud:
-    stage: deploy
+dependencies_cloud:
+    stage: prepare
     only:
         - main
     tags:
