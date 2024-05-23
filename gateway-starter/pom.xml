@@ -53,17 +53,17 @@
     <repositories>
         <repository>
             <id>easy-kit</id>
-            <url>https://maven.zkit.org/repository/maven-public/</url>
+            <url>https://r.zkit.org/repository/maven-public/</url>
         </repository>
     </repositories>
     <distributionManagement>
         <repository>
             <id>easy-kit</id>
-            <url>https://maven.zkit.org/repository/maven-releases/</url>
+            <url>https://r.zkit.org/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>easy-kit</id>
-            <url>https://maven.zkit.org/repository/maven-snapshots/</url>
+            <url>https://r.zkit.org/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
