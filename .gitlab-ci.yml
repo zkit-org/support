@@ -8,4 +8,5 @@ deploy_maven:
     tags:
         - dev
     script:
+        - mvn install
         - mvn clean deploy -s settings.xml
