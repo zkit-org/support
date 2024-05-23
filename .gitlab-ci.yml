@@ -1,6 +1,26 @@
 stages:
     - deploy
 
+deploy_boot:
+    stage: deploy
+    only:
+        - main
+    tags:
+        - dev
+    script:
+        - cd boot-dependencies
+        - mvn clean deploy -s ../settings.xml
+
+deploy_cloud:
+    stage: deploy
+    only:
+        - main
+    tags:
+        - dev
+    script:
+        - cd cloud-dependencies
+        - mvn clean deploy -s ../settings.xml
+
 deploy_maven:
     stage: deploy
     only:
