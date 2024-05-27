@@ -2,7 +2,7 @@ stages:
     - prepare
     - deploy
 
-dependencies_boot:
+dependencies-boot:
     stage: prepare
     only:
         - main
@@ -12,7 +12,7 @@ dependencies_boot:
         - cd boot-dependencies
         - mvn clean deploy -s ../settings.xml
 
-dependencies_cloud:
+dependencies-cloud:
     stage: prepare
     only:
         - main
@@ -22,7 +22,7 @@ dependencies_cloud:
         - cd cloud-dependencies
         - mvn clean deploy -s ../settings.xml
 
-deploy_maven:
+deploy-all:
     stage: deploy
     only:
         - main
