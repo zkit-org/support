@@ -40,6 +40,7 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private boolean isExclude(ServerHttpRequest request) {
         String path = request.getURI().getPath();
+        if(configuration.getExclude() == null) return false;
         return configuration.getExclude().stream().anyMatch(pattern -> matcher.match(pattern, path));
     }
 

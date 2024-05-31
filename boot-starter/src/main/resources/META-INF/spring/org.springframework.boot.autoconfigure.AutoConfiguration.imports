@@ -14,4 +14,3 @@ org.zkit.support.starter.boot.service.FreemarkerService
 org.zkit.support.starter.boot.service.SessionService
 org.zkit.support.starter.boot.service.TokenService
 org.zkit.support.starter.boot.utils.SpringUtils
-org.zkit.support.starter.boot.interceptor.TraceIdInterceptor

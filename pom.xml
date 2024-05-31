@@ -19,6 +19,7 @@
         <module>redisson-starter</module>
         <module>throttler-starter</module>
         <module>openapi-starter</module>
+        <module>skywalking-starter</module>
     </modules>
 
     <repositories>
