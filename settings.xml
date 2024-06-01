@@ -10,7 +10,7 @@
     <mirrors>
         <mirror>
             <id>easy-kit</id>
-            <mirrorOf>*</mirrorOf>
+            <mirrorOf>central</mirrorOf>
             <url>https://r.zkit.org/repository/maven-public/</url>
         </mirror>
     </mirrors>
