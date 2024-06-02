@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>org.zkit.support</groupId>
-            <artifactId>skywallking-starter</artifactId>
+            <artifactId>skywalking-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

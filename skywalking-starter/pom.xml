@@ -7,7 +7,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/>
     </parent>
-    <artifactId>skywallking-starter</artifactId>
+    <artifactId>skywalking-starter</artifactId>
     <packaging>jar</packaging>
     <name>Easy Kit Support - Skywalking Starter</name>
 
