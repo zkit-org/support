@@ -9,3 +9,4 @@ org.zkit.support.starter.boot.service.EmailCodeService
 org.zkit.support.starter.boot.service.EmailService
 org.zkit.support.starter.boot.service.FreemarkerService
 org.zkit.support.starter.boot.utils.SpringUtils
+org.zkit.support.starter.boot.okhttp.OKHttpConfiguration
