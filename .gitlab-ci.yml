@@ -10,7 +10,7 @@ dependencies-boot:
         - dev
     script:
         - cd boot-dependencies
-        - mvn clean deploy -s ../settings.xml
+        - mvn clean deploy -U -s ../settings.xml
 
 dependencies-cloud:
     stage: prepare
@@ -20,7 +20,7 @@ dependencies-cloud:
         - dev
     script:
         - cd cloud-dependencies
-        - mvn clean deploy -s ../settings.xml
+        - mvn clean deploy -U -s ../settings.xml
 
 deploy-all:
     stage: deploy
@@ -30,4 +30,4 @@ deploy-all:
         - dev
     script:
         - mvn install
-        - mvn clean deploy -s settings.xml
+        - mvn clean deploy -U -s settings.xml
