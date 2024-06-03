@@ -29,5 +29,4 @@ deploy-all:
     tags:
         - dev
     script:
-        - mvn install
         - mvn clean deploy -U -s settings.xml
