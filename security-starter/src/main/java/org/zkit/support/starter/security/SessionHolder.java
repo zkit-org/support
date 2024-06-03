@@ -1,7 +1,7 @@
-package org.zkit.support.starter.boot.auth;
+package org.zkit.support.starter.security;
 
 import io.netty.util.concurrent.FastThreadLocal;
-import org.zkit.support.starter.boot.entity.SessionUser;
+import org.zkit.support.starter.security.entity.SessionUser;
 
 public class SessionHolder {
 

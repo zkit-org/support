@@ -1,4 +1,4 @@
-package org.zkit.support.starter.boot.service;
+package org.zkit.support.starter.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -8,8 +8,8 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.zkit.support.starter.boot.configuration.AuthConfiguration;
-import org.zkit.support.starter.boot.entity.CreateTokenData;
+import org.zkit.support.starter.security.configuration.AuthConfiguration;
+import org.zkit.support.starter.security.entity.CreateTokenData;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;

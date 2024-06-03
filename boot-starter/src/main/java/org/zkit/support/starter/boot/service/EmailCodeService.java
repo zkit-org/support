@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.zkit.support.starter.boot.code.MailCode;
 import org.zkit.support.starter.boot.code.PublicCode;
-import org.zkit.support.starter.boot.configuration.AuthConfiguration;
+import org.zkit.support.starter.boot.configuration.EmailConfiguration;
 import org.zkit.support.starter.boot.entity.EmailCode;
 import org.zkit.support.starter.boot.entity.EmailData;
 import org.zkit.support.starter.boot.exception.ResultException;
@@ -24,14 +24,14 @@ public class EmailCodeService {
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
     @Resource
-    private AuthConfiguration configuration;
+    private EmailConfiguration configuration;
     @Resource
     private EmailService emailService;
 
     private EmailCode newCode(String email, String action) {
         String codeKey = "email:code:" + action + ":" + email;
         EmailCode code = new EmailCode();
-        code.setCode(configuration.isDebug() ? configuration.getEmailCode() : String.valueOf((int)((Math.random() * 9 + 1) * 100000)));
+        code.setCode(configuration.getDebug() ? configuration.getCode() : String.valueOf((int)((Math.random() * 9 + 1) * 100000)));
         code.setCreatedAt(new Date());
         redisTemplate.opsForValue().set(codeKey, code, 5, TimeUnit.MINUTES);
         return code;
@@ -53,7 +53,7 @@ public class EmailCodeService {
             code = this.newCode(email, action);
         }
         redisTemplate.opsForValue().set(timeKey, System.currentTimeMillis(), 1, TimeUnit.MINUTES);
-        if(configuration.isDebug()) {
+        if(configuration.getDebug()) {
             return;
         }
         EmailData data = new EmailData();

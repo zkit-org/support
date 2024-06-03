@@ -1,4 +1,4 @@
-package org.zkit.support.starter.boot.service;
+package org.zkit.support.starter.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.zkit.support.starter.boot.entity.SessionUser;
 import org.zkit.support.starter.boot.utils.MD5Utils;
+import org.zkit.support.starter.security.entity.SessionUser;
 
 import java.util.concurrent.TimeUnit;
 

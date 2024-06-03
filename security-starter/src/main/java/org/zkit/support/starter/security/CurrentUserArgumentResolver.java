@@ -1,4 +1,4 @@
-package org.zkit.support.starter.boot.auth;
+package org.zkit.support.starter.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.NonNull;
@@ -7,10 +7,10 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import org.zkit.support.starter.boot.auth.annotation.CurrentUser;
-import org.zkit.support.starter.boot.entity.SessionUser;
-import org.zkit.support.starter.boot.service.SessionService;
 import org.zkit.support.starter.boot.utils.RequestUtils;
+import org.zkit.support.starter.security.annotation.CurrentUser;
+import org.zkit.support.starter.security.entity.SessionUser;
+import org.zkit.support.starter.security.service.SessionService;
 
 public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolver {
     private final SessionService sessionService;

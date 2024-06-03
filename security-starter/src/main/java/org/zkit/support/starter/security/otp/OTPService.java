@@ -1,10 +1,11 @@
-package org.zkit.support.starter.boot.otp;
+package org.zkit.support.starter.security.otp;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base32;
 import org.springframework.stereotype.Component;
-import org.zkit.support.starter.boot.configuration.AuthConfiguration;
+import org.zkit.support.starter.security.configuration.AuthConfiguration;
+import org.zkit.support.starter.security.configuration.OTPConfiguration;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;

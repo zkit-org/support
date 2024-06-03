@@ -1,4 +1,4 @@
-package org.zkit.support.starter.boot.auth;
+package org.zkit.support.starter.security;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.zkit.support.starter.boot.auth.annotation.PublicRequest;
-import org.zkit.support.starter.boot.auth.annotation.CurrentUser;
-import org.zkit.support.starter.boot.configuration.AuthConfiguration;
-import org.zkit.support.starter.boot.entity.SessionUser;
 import org.zkit.support.starter.boot.exception.ResultException;
-import org.zkit.support.starter.boot.service.SessionService;
 import org.zkit.support.starter.boot.utils.RequestUtils;
+import org.zkit.support.starter.security.annotation.CurrentUser;
+import org.zkit.support.starter.security.annotation.PublicRequest;
+import org.zkit.support.starter.security.configuration.AuthConfiguration;
+import org.zkit.support.starter.security.entity.SessionUser;
+import org.zkit.support.starter.security.service.SessionService;
 
 import java.util.List;
 import java.util.Objects;

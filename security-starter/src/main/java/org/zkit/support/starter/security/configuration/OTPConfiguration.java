@@ -1,4 +1,4 @@
-package org.zkit.support.starter.boot.otp;
+package org.zkit.support.starter.security.configuration;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

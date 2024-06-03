@@ -20,6 +20,7 @@
         <module>throttler-starter</module>
         <module>openapi-starter</module>
         <module>skywalking-starter</module>
+        <module>security-starter</module>
     </modules>
 
     <repositories>

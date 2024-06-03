@@ -1,4 +1,4 @@
-package org.zkit.support.starter.boot.auth.annotation;
+package org.zkit.support.starter.security.annotation;
 
 import java.lang.annotation.*;
 

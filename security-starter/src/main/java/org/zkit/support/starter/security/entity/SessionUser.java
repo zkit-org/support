@@ -1,4 +1,4 @@
-package org.zkit.support.starter.boot.entity;
+package org.zkit.support.starter.security.entity;
 
 import lombok.Data;
 
