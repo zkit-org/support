@@ -23,7 +23,9 @@ public class ResultException extends RuntimeException {
     public static ResultException busy() {
         return new ResultException(500, "Service is busy");
     }
-
+    public static ResultException notfound() {
+        return new ResultException(404, "Not found");
+    }
     public static ResultException unauthorized() {
         return new ResultException(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
