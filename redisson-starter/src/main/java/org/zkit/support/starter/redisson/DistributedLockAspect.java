@@ -16,11 +16,13 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
+import org.zkit.support.starter.boot.exception.ResultException;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 @Aspect
@@ -43,18 +45,13 @@ public class DistributedLockAspect {
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
         long waitTime = distributedLock.waitTime();
         long leaseTime = distributedLock.leaseTime();
+        boolean el = distributedLock.el();
         TimeUnit timeUnit = distributedLock.timeUnit();
         String[] lockValues = distributedLock.value();
-        String[] keys = distributedLock.key();
 
         List<String> lockKeys = Stream.of(lockValues).map(lockValue -> {
-            String key = keys.length > 0 ? keys[0] : "";
-            String lockKey = StringUtils.isNotEmpty(key) ? evaluateExpression(key, joinPoint) : key;
-            String redisKey = "lock:"+lockValue;
-            if (StringUtils.isNotEmpty(lockKey)) {
-                redisKey = "lock:"+lockValue + ":" + lockKey;
-            }
-            return redisKey;
+            String lockKey = el ? evaluateExpression(lockValue, joinPoint) : lockValue;
+            return "lock:"+lockKey;
         }).toList();
         log.info("Lock keys: {}", lockKeys);
 
@@ -67,7 +64,7 @@ public class DistributedLockAspect {
                     lock.unlock();
                 }
             } else {
-                throw new RuntimeException("Failed to acquire lock");
+                throw ResultException.busy();
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

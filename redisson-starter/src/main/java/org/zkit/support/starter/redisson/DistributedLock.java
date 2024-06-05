@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedLock {
     String[] value() default {""}; // 锁的名称
-    String[] key() default {""}; // 锁的key
-    long waitTime() default 30L; // 等待时间，默认30秒
+    long waitTime() default -1L; // 等待时间
     long leaseTime() default -1L; // -1表示永不过期
+    boolean el() default true; // 是否使用SpEL表达式
     TimeUnit timeUnit() default TimeUnit.SECONDS; // 时间单位，默认秒
 }
