@@ -52,7 +52,7 @@ public class OpenAPIConfigurer {
             Node document = parser.parse(markdown);
             html = HtmlRenderer.builder().build().render(document);
         }catch (Exception e) {
-            log.info(e.getMessage());
+            // log.info(e.getMessage());
         }
         if(html == null) {
             return configuration.getDescription();
