@@ -21,6 +21,7 @@
         <module>openapi-starter</module>
         <module>skywalking-starter</module>
         <module>security-starter</module>
+        <module>kafka-starter</module>
     </modules>
 
     <repositories>
