@@ -20,7 +20,11 @@
 </#list>
 <#list table.fields as field>
 <#if !field.keyFlag><#--生成普通字段 -->
+    <#if field.propertyType == "Object">
+        <result column="${field.name}" property="${field.propertyName}" typeHandler="com.baomidou.mybatisplus.extension.handlers.Fastjson2TypeHandler" />
+    <#else>
         <result column="${field.name}" property="${field.propertyName}" />
+    </#if>
 </#if>
 </#list>
     </resultMap>
