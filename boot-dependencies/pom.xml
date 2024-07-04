@@ -182,7 +182,12 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.109.Final</version>
+            <version>4.1.111.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http</artifactId>
+            <version>4.1.111.Final</version>
         </dependency>
         <!-- 用于SecureKey生成 -->
         <dependency>
