@@ -9,8 +9,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <java.version>17</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <nacos.version>2023.0.1.0</nacos.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
     </properties>

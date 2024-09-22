@@ -15,8 +15,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <java.version>17</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.22</aspectj.version>
     </properties>
 

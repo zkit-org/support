@@ -24,6 +24,11 @@
         <module>kafka-starter</module>
     </modules>
 
+    <properties>
+        <java.version>21</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <repositories>
         <repository>
             <id>easy-kit</id>
