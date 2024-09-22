@@ -10,6 +10,8 @@ dependencies-boot:
         - dev
     script:
         - cd boot-dependencies
+        - java -version
+        - mvn -v
         - mvn clean deploy -U -s ../settings.xml
 
 dependencies-cloud:
@@ -20,6 +22,8 @@ dependencies-cloud:
         - dev
     script:
         - cd cloud-dependencies
+        - java -version
+        - mvn -v
         - mvn clean deploy -U -s ../settings.xml
 
 deploy-all:
@@ -29,4 +33,6 @@ deploy-all:
     tags:
         - dev
     script:
+        - java -version
+        - mvn -v
         - mvn clean deploy -U -s settings.xml
