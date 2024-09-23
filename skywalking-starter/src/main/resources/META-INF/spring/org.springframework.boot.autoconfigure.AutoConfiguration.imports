@@ -1,2 +1,3 @@
 org.zkit.support.starter.skywalking.TraceIdInterceptor
 org.zkit.support.starter.skywalking.WebMvcConfigurer
+org.zkit.support.starter.skywalking.TraceIdFilter
