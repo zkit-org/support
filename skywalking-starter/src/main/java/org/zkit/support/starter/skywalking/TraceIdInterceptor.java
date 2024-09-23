@@ -24,6 +24,7 @@ public class TraceIdInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView){
+        log.info("traceId===={}", TraceContext.traceId());
         response.setHeader("x-trace-id", TraceContext.traceId());
     }
 
