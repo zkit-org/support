@@ -18,17 +18,17 @@ public class TraceIdFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String traceId = WebFluxSkyWalkingOperators.continueTracing(exchange, TraceContext::traceId);
-        ServerHttpRequest request = exchange.getRequest();
-        ServerHttpResponse response = exchange.getResponse();
-        //对请求对象request进行增强
-        ServerHttpRequest req = request.mutate().headers(httpHeaders -> {
-            //httpHeaders 封装了所有的请求头
-            httpHeaders.add("x-trace-id", traceId);
-        }).build();
-        //设置增强的request到exchange对象中
-        exchange.mutate().request(req).response(response).build();
-        response.getHeaders().set("x-trace-id", traceId);
+//        String traceId = WebFluxSkyWalkingOperators.continueTracing(exchange, TraceContext::traceId);
+//        ServerHttpRequest request = exchange.getRequest();
+//        ServerHttpResponse response = exchange.getResponse();
+//        //对请求对象request进行增强
+//        ServerHttpRequest req = request.mutate().headers(httpHeaders -> {
+//            //httpHeaders 封装了所有的请求头
+//            httpHeaders.add("x-trace-id", traceId);
+//        }).build();
+//        //设置增强的request到exchange对象中
+//        exchange.mutate().request(req).response(response).build();
+//        response.getHeaders().set("x-trace-id", traceId);
         return chain.filter(exchange);
     }
 
