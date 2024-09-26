@@ -21,6 +21,7 @@
         <module>openapi-starter</module>
         <module>security-starter</module>
         <module>kafka-starter</module>
+        <module>tracing-starter</module>
     </modules>
 
     <properties>

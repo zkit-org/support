@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.zkit.support</groupId>
+        <artifactId>cloud-dependencies</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+    <artifactId>tracing-starter</artifactId>
+    <packaging>pom</packaging>
+    <name>Easy Kit Support - Tracing Starter</name>
+
+    <properties>
+        <micrometer-tracing.version>1.2.0</micrometer-tracing.version>
+        <micrometer-observation.version>1.12.0</micrometer-observation.version>
+        <feign-micrometer.version>12.5</feign-micrometer.version>
+        <zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.zkit.support</groupId>
+            <artifactId>boot-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--guava-->
+        <!--micrometer-tracing-bom导入链路追踪版本中心  1-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bom</artifactId>
+            <version>${micrometer-tracing.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <!--micrometer-tracing指标追踪  2-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing</artifactId>
+            <version>${micrometer-tracing.version}</version>
+        </dependency>
+        <!--micrometer-tracing-bridge-brave适配zipkin的桥接包 3-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-brave</artifactId>
+            <version>${micrometer-tracing.version}</version>
+        </dependency>
+        <!--micrometer-observation 4-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-observation</artifactId>
+            <version>${micrometer-observation.version}</version>
+        </dependency>
+        <!--feign-micrometer 5-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-micrometer</artifactId>
+            <version>${feign-micrometer.version}</version>
+        </dependency>
+        <!--zipkin-reporter-brave 6-->
+        <dependency>
+            <groupId>io.zipkin.reporter2</groupId>
+            <artifactId>zipkin-reporter-brave</artifactId>
+            <version>${zipkin-reporter-brave.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>easy-kit</id>
+            <url>https://r.zkit.org/repository/maven-public/</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>easy-kit</id>
+            <url>https://r.zkit.org/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>easy-kit</id>
+            <url>https://r.zkit.org/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
