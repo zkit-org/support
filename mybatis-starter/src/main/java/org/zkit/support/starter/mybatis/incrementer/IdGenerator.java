@@ -31,13 +31,13 @@ public class IdGenerator {
     /**
      * mask/max value
      */
-    private final static long MAX_MACHINE_NUM = -1L ^ (-1L << MACHINE_BIT);
-    private final static long MAX_SEQUENCE = -1L ^ (-1L << SEQUENCE_BIT);
+    private final static long MAX_MACHINE_NUM = ~(-1L << MACHINE_BIT);
+    private final static long MAX_SEQUENCE = ~(-1L << SEQUENCE_BIT);
 
     private final static long MACHINE_LEFT = SEQUENCE_BIT;
-    private final static long TIMESTMP_LEFT = MACHINE_BIT + SEQUENCE_BIT;
+    private final static long TIMESTAMP_LEFT = MACHINE_BIT + SEQUENCE_BIT;
 
-    private long machineId;
+    private final long machineId;
     private long sequence = 0L;
     private long lastStmp = -1L;
 
@@ -52,7 +52,6 @@ public class IdGenerator {
     /**
      * generate new ID
      *
-     * @return
      */
     public synchronized long nextId() {
         long currStmp = getTimestamp();
@@ -71,7 +70,7 @@ public class IdGenerator {
 
         lastStmp = currStmp;
 
-        return currStmp << TIMESTMP_LEFT //
+        return currStmp << TIMESTAMP_LEFT //
                 | machineId << MACHINE_LEFT //
                 | sequence;
     }
@@ -90,7 +89,7 @@ public class IdGenerator {
     }
 
     public static Date parseIdTimestamp(long id) {
-        return new Date((id >>> TIMESTMP_LEFT) * 10);
+        return new Date((id >>> TIMESTAMP_LEFT) * 10);
     }
 
     public static String uuid() {

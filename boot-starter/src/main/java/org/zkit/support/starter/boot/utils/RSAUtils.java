@@ -20,7 +20,7 @@ public class RSAUtils {
             RSA rsa = new RSA(null, publicKey);
             return rsa.encryptBase64(content, KeyType.PublicKey);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             throw ResultException.internal();
         }
     }
@@ -37,7 +37,7 @@ public class RSAUtils {
             RSA rsa = new RSA(privateKey, null);
             return rsa.decryptStr(content, KeyType.PrivateKey);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             throw ResultException.internal();
         }
     }

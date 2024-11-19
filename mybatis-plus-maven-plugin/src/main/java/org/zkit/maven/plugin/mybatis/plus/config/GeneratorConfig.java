@@ -30,7 +30,7 @@ public class GeneratorConfig {
             Yaml yaml = new Yaml(new Constructor(GeneratorConfig.class, new LoaderOptions()));
             config = yaml.load(input);
         }catch (Exception e) {
-            log.error("init error: " + e.getMessage());
+            log.error("init error: " + e.getMessage(), e);
         }
         return config;
     }

@@ -51,7 +51,6 @@ public class KafkaConfiguration {
     @Value("${spring.kafka.consumer.auto-commit-interval:1000}")
     private Integer autoCommitInterval;
 
-
     /**
      *  生产者配置信息
      */
@@ -84,7 +83,6 @@ public class KafkaConfiguration {
     public KafkaTemplate<String, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-
 
     /**
      *  消费者配置信息

@@ -22,7 +22,7 @@ public class AESUtils {
             cipher.init(Cipher.DECRYPT_MODE, key);
             return new String(cipher.doFinal(encrypted));
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
             throw ResultException.internal();
         }
     }

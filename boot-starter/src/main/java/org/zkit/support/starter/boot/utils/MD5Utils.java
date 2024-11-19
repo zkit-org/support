@@ -16,7 +16,7 @@ public class MD5Utils {
             MessageDigest md5 = MessageDigest.getInstance("md5");
             digest  = md5.digest(str.getBytes(StandardCharsets.UTF_8));
         } catch (NoSuchAlgorithmException e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         //16是表示转换为16进制数
         if (digest != null) {

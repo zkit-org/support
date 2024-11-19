@@ -33,7 +33,7 @@ public class HTTPService {
                 }
             }
         }catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return null;
     }
@@ -53,7 +53,7 @@ public class HTTPService {
                 }
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return null;
     }

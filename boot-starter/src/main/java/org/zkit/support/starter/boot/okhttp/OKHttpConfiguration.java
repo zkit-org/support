@@ -75,7 +75,7 @@ public class OKHttpConfiguration {
             sslContext.init(null, new TrustManager[]{x509TrustManager()}, new SecureRandom());
             return sslContext.getSocketFactory();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e);
         }
         return null;
     }

@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.zkit.support.starter.boot.configuration.ResponseAdviceConfiguration;
 import org.zkit.support.starter.boot.entity.Result;
+import org.zkit.support.starter.boot.entity.ValidationResult;
 import org.zkit.support.starter.boot.exception.ResultException;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -47,7 +49,9 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         if(isExclude(request)){
-            return body;
+            if (body != null) {
+                return body;
+            }
         }
         if(body instanceof Result){
             return body;
@@ -73,15 +77,22 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
         String res2 = bindingResult.getFieldErrors().stream()
                 .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
                 .collect(Collectors.joining("; "));
-        return Result.error(HttpStatus.BAD_REQUEST.value(), res2, null);
+        List<ValidationResult> results = bindingResult.getFieldErrors().stream()
+                .map(fieldError -> {
+                    ValidationResult result = new ValidationResult();
+                    result.setField(fieldError.getField());
+                    result.setMessage(fieldError.getDefaultMessage());
+                    result.setCode(fieldError.getCode());
+                    return result;
+                }).toList();
+        return Result.error(HttpStatus.BAD_REQUEST.value(), res2, results);
     }
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> exceptionHandler(Exception e){
-        log.error(e.toString());
-        e.printStackTrace();
+        log.error(e.getMessage(), e);
         return Result.error("Server error", null);
     }
 
