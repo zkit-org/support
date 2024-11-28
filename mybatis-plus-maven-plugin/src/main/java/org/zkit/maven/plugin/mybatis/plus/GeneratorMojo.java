@@ -27,7 +27,7 @@ public class GeneratorMojo extends AbstractMojo {
     @Parameter(name = "basedir", defaultValue = "${basedir}")
     private String basedir;
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() {
         Log log = getLog();
         GeneratorConfig config = GeneratorConfig.init(basedir, log);
         Module[] modules = config.getModules();
