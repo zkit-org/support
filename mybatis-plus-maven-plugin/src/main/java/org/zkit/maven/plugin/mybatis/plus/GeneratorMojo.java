@@ -71,7 +71,10 @@ public class GeneratorMojo extends AbstractMojo {
                     builder.entity("entity.dto");
                 })
                 .strategyConfig(builder -> {
-                    builder.entityBuilder().enableLombok().enableFileOverride();
+                    builder.entityBuilder()
+                            .enableChainModel()
+                            .enableLombok()
+                            .enableFileOverride();
                     builder.serviceBuilder().formatServiceFileName("%sService");
                     builder.controllerBuilder().enableRestStyle();
                     builder.mapperBuilder()
