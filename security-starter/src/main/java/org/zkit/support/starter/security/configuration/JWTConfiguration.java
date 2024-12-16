@@ -4,14 +4,11 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-@ConfigurationProperties(prefix = "auth")
+@ConfigurationProperties(prefix = "jwt")
 @Data
-public class AuthConfiguration {
+public class JWTConfiguration {
 
-    private List<String> commonAccess;
-    private List<String> publicAccess;
+    private String secret;
 
 }

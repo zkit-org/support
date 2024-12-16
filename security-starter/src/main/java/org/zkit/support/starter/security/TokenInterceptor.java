@@ -58,9 +58,6 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         // 权限校验
         if (user != null) {
-            if(configuration.getSu().equals(user.getUsername())){
-                return true;
-            }
             if(checkCommonAccess(request)){
                 return true;
             }

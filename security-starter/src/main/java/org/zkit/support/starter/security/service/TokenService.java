@@ -8,7 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.zkit.support.starter.security.configuration.AuthConfiguration;
+import org.zkit.support.starter.security.configuration.JWTConfiguration;
 import org.zkit.support.starter.security.entity.CreateTokenData;
 
 import javax.crypto.SecretKey;
@@ -20,11 +20,11 @@ import java.util.Date;
 public class TokenService {
 
     @Resource
-    private AuthConfiguration configuration;
+    private JWTConfiguration configuration;
 
     public String create(CreateTokenData data) {
         Date now = new Date();
-        SecretKey key = Keys.hmacShaKeyFor(configuration.getJwtSecret().getBytes(StandardCharsets.UTF_8));
+        SecretKey key = Keys.hmacShaKeyFor(configuration.getSecret().getBytes(StandardCharsets.UTF_8));
         JwtBuilder jwtBuilder =  Jwts.builder()
                 .id(data.getId().toString())
                 .subject(data.getUsername()) //用户名
@@ -35,7 +35,7 @@ public class TokenService {
     }
 
     public boolean checked(String token) {
-        SecretKey key = Keys.hmacShaKeyFor(configuration.getJwtSecret().getBytes(StandardCharsets.UTF_8));
+        SecretKey key = Keys.hmacShaKeyFor(configuration.getSecret().getBytes(StandardCharsets.UTF_8));
         try{
             Jwts.parser()
                     .verifyWith(key)
@@ -49,7 +49,7 @@ public class TokenService {
     }
 
     public Jws<Claims> parse(String token) {
-        SecretKey key = Keys.hmacShaKeyFor(configuration.getJwtSecret().getBytes(StandardCharsets.UTF_8));
+        SecretKey key = Keys.hmacShaKeyFor(configuration.getSecret().getBytes(StandardCharsets.UTF_8));
         Jws<Claims> jws = null;
         try{
             jws = Jwts.parser()

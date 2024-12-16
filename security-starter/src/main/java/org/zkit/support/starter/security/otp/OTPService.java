@@ -73,9 +73,6 @@ public class OTPService {
      * @return 匹配成功与否
      */
     public boolean check(String secret, String code) {
-        if(authConfiguration.isDebug()) {
-            return authConfiguration.getOtpCode().equals(code);
-        }
         Base32 codec = new Base32();
         byte[] decodedKey = codec.decode(secret);
         // convert unix msec time into a 30 second "window"

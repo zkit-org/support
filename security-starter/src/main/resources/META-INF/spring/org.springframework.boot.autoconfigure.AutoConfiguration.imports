@@ -1,7 +1,8 @@
 org.zkit.support.starter.security.TokenInterceptor
 org.zkit.support.starter.security.configuration.AuthConfiguration
+org.zkit.support.starter.security.configuration.OTPConfiguration
+org.zkit.support.starter.security.configuration.JWTConfiguration
 org.zkit.support.starter.security.configurer.WebMvcConfigurer
 org.zkit.support.starter.security.service.SessionService
 org.zkit.support.starter.security.service.TokenService
-org.zkit.support.starter.security.configuration.OTPConfiguration
 org.zkit.support.starter.security.otp.OTPService

@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "auth.otp")
+@ConfigurationProperties(prefix = "otp")
 @Data
 public class OTPConfiguration {
 
