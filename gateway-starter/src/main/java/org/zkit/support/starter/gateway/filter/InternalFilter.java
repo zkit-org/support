@@ -30,7 +30,7 @@ public class InternalFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        if(!configuration.getEnabled()) {
+        if(configuration.getEnabled()) {
             return chain.filter(exchange);
         }
         ServerHttpRequest request = exchange.getRequest();
