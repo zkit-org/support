@@ -13,8 +13,6 @@ public class SessionUser {
     private List<Api> apis;
     private Long expiresIn;
     private String jwtToken;
-    private Boolean otpBind;
-    private Boolean requireOtp;
 
     @Data
     public static class Api {

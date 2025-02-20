@@ -56,13 +56,6 @@ public class TokenInterceptor implements HandlerInterceptor {
             }
         }
 
-        // 二次验证
-        if(user != null && user.getRequireOtp()) {
-            if(!user.getOtpBind()) {
-                throw ResultException.otpNotBind();
-            }
-        }
-
         // 权限校验
         if (user != null) {
             if(checkCommonAccess(request)){

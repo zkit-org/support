@@ -29,7 +29,4 @@ public class ResultException extends RuntimeException {
     public static ResultException unauthorized() {
         return new ResultException(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
-    public static ResultException otpNotBind() {
-        return new ResultException(4001, "OTP not bind");
-    }
 }
