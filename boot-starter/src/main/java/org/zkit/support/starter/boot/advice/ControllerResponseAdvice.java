@@ -53,7 +53,7 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
                 return body;
             }
         }
-        if(body instanceof Result){
+        if(body instanceof Result) {
             return body;
         }
         return Result.success(body);
@@ -92,7 +92,12 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> exceptionHandler(Exception e){
-        log.error(e.getMessage(), e);
+        log.error("exceptionHandler, {}", e.getMessage());
+        log.error("exceptionHandler, {}", e.getClass().getName());
+        if(e instanceof ResultException resultException){
+            log.error("is ResultException");
+            return Result.error(resultException.getCode(), resultException.getMessage(), resultException.getData());
+        }
         return Result.error("Server error", null);
     }
 

@@ -1,0 +1,1 @@
+dubboExceptionFilter=org.zkit.support.starter.cloud.filter.DubboExceptionFilter
