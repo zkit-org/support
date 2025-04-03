@@ -8,13 +8,14 @@
         <relativePath/>
     </parent>
     <artifactId>tracing-starter</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>Easy Kit Support - Tracing Starter</name>
 
     <properties>
-        <micrometer-tracing.version>1.4.3</micrometer-tracing.version>
+        <micrometer-tracing.version>1.2.0</micrometer-tracing.version>
         <micrometer-observation.version>1.12.0</micrometer-observation.version>
-        <zipkin.version>3.5.0</zipkin.version>
+        <feign-micrometer.version>12.5</feign-micrometer.version>
+        <zipkin-reporter-brave.version>2.17.0</zipkin-reporter-brave.version>
     </properties>
 
     <dependencies>
@@ -24,7 +25,6 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!--guava-->
         <!--micrometer-tracing-bom导入链路追踪版本中心  1-->
         <dependency>
             <groupId>io.micrometer</groupId>
@@ -51,22 +51,11 @@
             <artifactId>micrometer-observation</artifactId>
             <version>${micrometer-observation.version}</version>
         </dependency>
-        <!--zipkin-reporter-brave 6-->
+        <!--feign-micrometer 5-->
         <dependency>
-            <groupId>io.zipkin.reporter2</groupId>
-            <artifactId>zipkin-reporter-brave</artifactId>
-            <version>${zipkin.version}</version>
-        </dependency>
-        <!-- Brave as Tracer, Zipkin as exporter -->
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-tracing-brave-zipkin-spring-boot-starter</artifactId>
-            <version>3.3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.zipkin2</groupId>
-            <artifactId>zipkin</artifactId>
-            <version>${zipkin.version}</version>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-micrometer</artifactId>
+            <version>${feign-micrometer.version}</version>
         </dependency>
     </dependencies>
 
@@ -86,6 +75,14 @@
                 <version>3.3.5</version>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>

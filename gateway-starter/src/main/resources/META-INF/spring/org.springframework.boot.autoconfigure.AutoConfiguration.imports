@@ -1,4 +1,1 @@
-org.zkit.support.starter.gateway.configuration.InternalConfiguration
 org.zkit.support.starter.gateway.configurer.SpringDocConfigurer
-org.zkit.support.starter.gateway.filter.InternalFilter
-org.zkit.support.starter.gateway.filter.TraceIdFilter
