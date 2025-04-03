@@ -92,6 +92,7 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> exceptionHandler(Exception e){
+        log.error(e.getMessage());
         if(e instanceof ResultException resultException){
             return Result.error(resultException.getCode(), resultException.getMessage(), resultException.getData());
         }
