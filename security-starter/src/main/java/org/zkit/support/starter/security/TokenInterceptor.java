@@ -12,7 +12,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.zkit.support.starter.boot.exception.ResultException;
 import org.zkit.support.starter.boot.utils.RequestUtils;
-import org.zkit.support.starter.security.annotation.CurrentUser;
 import org.zkit.support.starter.security.annotation.PublicRequest;
 import org.zkit.support.starter.security.configuration.AuthConfiguration;
 import org.zkit.support.starter.security.entity.SessionUser;
@@ -100,11 +99,6 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     private void setUser(SessionUser user, @NonNull Object handler) {
         SessionHolder.set(user);
-    }
-
-    private boolean hasCurrentUserAnnotation(HandlerMethod handlerMethod){
-        CurrentUser sessionUser = handlerMethod.getMethodAnnotation(CurrentUser.class);
-        return sessionUser != null;
     }
 
     @Override

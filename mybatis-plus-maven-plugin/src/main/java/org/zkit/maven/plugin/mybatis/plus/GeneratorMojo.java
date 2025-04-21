@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -41,7 +39,6 @@ public class GeneratorMojo extends AbstractMojo {
     }
 
     private void handleModule(GeneratorConfig config, Module module) {
-        Log log = getLog();
         Datasource datasource = config.getDatasource();
         String username = System.getenv("GEN_DB_USERNAME");
         String password = System.getenv("GEN_DB_PASSWORD");

@@ -1,14 +1,9 @@
 package org.zkit.support.starter.boot.okhttp;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.TypeReference;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import org.zkit.support.starter.boot.entity.Result;
-
-import java.util.List;
 
 @Component
 @Slf4j
