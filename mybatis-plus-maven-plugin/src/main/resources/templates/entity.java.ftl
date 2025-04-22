@@ -1,7 +1,16 @@
 package ${package.Entity};
 
+<#assign hasObjectField = false>
+<#list table.fields as field>
+    <#if field.propertyType == "Object">
+        <#assign hasObjectField = true>
+        <#break>
+    </#if>
+</#list>
+<#if hasObjectField>
 import com.baomidou.mybatisplus.extension.handlers.Fastjson2TypeHandler;
 import com.baomidou.mybatisplus.annotation.TableField;
+</#if>
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
@@ -27,7 +36,6 @@ import lombok.experimental.Accessors;
  * @author ${author}
  * @since ${date}
  */
-@SuppressWarnings("unused")
 <#if entityLombokModel>
 @Data
     <#if chainModel>
