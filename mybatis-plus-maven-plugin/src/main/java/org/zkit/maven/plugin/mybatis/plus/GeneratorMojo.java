@@ -46,7 +46,7 @@ public class GeneratorMojo extends AbstractMojo {
                 .globalConfig(builder -> {
                     builder.author("generator") // 设置作者
                             .enableSpringdoc()
-                            .outputDir("src/main/java") // 指定输出目录
+                            .outputDir(basedir + "/src/main/java") // 指定输出目录
                             .disableOpenDir();
                 })
                     .dataSourceConfig(builder -> builder.typeConvertHandler((globalConfig, typeRegistry, metaInfo) -> {
@@ -64,7 +64,7 @@ public class GeneratorMojo extends AbstractMojo {
                 .packageConfig(builder -> {
                     builder.parent(config.getBasePackage()) // 设置父包名
                             .moduleName(module.getName()) // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, config.getMapperPackage() + "/" + module.getName())); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, basedir + "/" + config.getMapperPackage() + "/" + module.getName())); // 设置mapperXml生成路径
                     builder.entity("entity.dto");
                 })
                 .strategyConfig(builder -> {

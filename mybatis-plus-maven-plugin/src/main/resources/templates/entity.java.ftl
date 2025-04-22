@@ -27,6 +27,7 @@ import lombok.experimental.Accessors;
  * @author ${author}
  * @since ${date}
  */
+@SuppressWarnings("unused")
 <#if entityLombokModel>
 @Data
     <#if chainModel>
