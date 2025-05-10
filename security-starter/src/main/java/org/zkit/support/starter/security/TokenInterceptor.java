@@ -37,12 +37,6 @@ public class TokenInterceptor implements HandlerInterceptor {
         // 无论是否公开，尝试注入用户信息
         setUser(user, handler);
 
-        // 开放权限
-        boolean publicCheck = checkPublicAccess(request);
-        if(publicCheck){
-            return true;
-        }
-
         // 公开的请求
         if (handler instanceof HandlerMethod handlerMethod) {
             PublicRequest methodAnnotation = handlerMethod.getMethodAnnotation(PublicRequest.class);
@@ -71,16 +65,6 @@ public class TokenInterceptor implements HandlerInterceptor {
     private boolean checkApis(List<SessionUser.Api> apis, HttpServletRequest request) {
         for (SessionUser.Api api : apis) {
             if (matcher.match(api.getPath(), request.getRequestURI()) && api.getMethod().equalsIgnoreCase(request.getMethod())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkPublicAccess(HttpServletRequest request) {
-        String uri = request.getRequestURI();
-        for (String publicApi : configuration.getPublicAccess()) {
-            if (matcher.match(publicApi, uri)) {
                 return true;
             }
         }
