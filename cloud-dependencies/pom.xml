@@ -10,7 +10,7 @@
 
     <properties>
         <nacos.version>2023.0.1.0</nacos.version>
-        <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <spring-cloud.version>2024.0.1</spring-cloud.version>
         <dubbo.version>3.3.4</dubbo.version>
     </properties>
 
