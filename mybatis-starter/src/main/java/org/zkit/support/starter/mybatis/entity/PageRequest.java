@@ -1,11 +1,13 @@
 package org.zkit.support.starter.mybatis.entity;
 
+import java.io.Serializable;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.Data;
 
 @Data
-public class PageRequest {
+public class PageRequest implements Serializable {
 
     private int page;
     private int size;
