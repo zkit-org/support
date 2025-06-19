@@ -3,6 +3,9 @@ package org.zkit.support.starter.boot.okhttp;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+
+import java.io.InputStream;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -53,4 +56,19 @@ public class HTTPService {
         return null;
     }
 
+    public InputStream download(String url) {
+        return download(url, null);
+    }
+
+    public InputStream download(String url, Headers headers) {
+        if(headers == null) headers = new Headers.Builder().build();
+        Request request = new Request.Builder().url(url).headers(headers).get().build();
+        log.info("download: {}", request);
+        try {
+            return client.newCall(request).execute().body().byteStream();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return null;
+    }
 }
