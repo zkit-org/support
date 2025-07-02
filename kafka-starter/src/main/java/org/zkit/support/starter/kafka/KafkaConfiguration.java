@@ -47,7 +47,7 @@ public class KafkaConfiguration {
     @Value("${spring.kafka.consumer.batch-concurrency:3}")
     private Integer batchConcurrency;
 
-    @Value("${spring.kafka.consumer.enable-auto-commit:false}")
+    @Value("${spring.kafka.consumer.enable-auto-commit:true}")
     private Boolean autoCommit;
 
     @Value("${spring.kafka.consumer.auto-commit-interval:1000}")
@@ -97,6 +97,7 @@ public class KafkaConfiguration {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, maxPollRecords);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, autoCommit);
+        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, autoCommitInterval);
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 30000);
         props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -114,7 +115,7 @@ public class KafkaConfiguration {
         //设置并发量，小于或等于Topic的分区数
         factory.setConcurrency(batchConcurrency);
         factory.getContainerProperties().setPollTimeout(1500);
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);
         //设置为批量消费，每个批次数量在Kafka配置参数中设置ConsumerConfig.MAX_POLL_RECORDS_CONFIG
         factory.setBatchListener(true);
         return factory;
