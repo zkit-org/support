@@ -10,16 +10,22 @@ import java.util.Locale;
  * @author grant
  */
 public class MessageUtils {
-    /**
-     * 根据消息键和参数 获取消息 委托给spring messageSource
-     *
-     * @param code 消息键
-     * @param args 参数
-     * @return 获取国际化翻译值
-     */
-    public static String get(String code, Object... args) {
+
+    public static String get(String code) {
+        return get(code, null, null);
+    }
+
+    public static String get(String code, Object[] args) {
+        return get(code, args, null);
+    }
+
+    public static String get(String code, String defaultMessage) {
+        return get(code, null, defaultMessage);
+    }
+
+    public static String get(String code, Object[] args, String defaultMessage) {
         MessageSource messageSource = SpringUtils.getBean(MessageSource.class);
-        return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
+        return messageSource.getMessage(code, args, defaultMessage, LocaleContextHolder.getLocale());
     }
 
     public static String getLocale() {
