@@ -29,4 +29,14 @@ public class ResultException extends RuntimeException {
     public static ResultException unauthorized() {
         return new ResultException(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
+
+    public static ResultException of(Integer code, String message) {
+        return new ResultException(code, message);
+    }
+
+    public static ResultException of(Integer code, String message, Object data) {
+        ResultException resultException = new ResultException(code, message);
+        resultException.setData(data);
+        return resultException;
+    }
 }
