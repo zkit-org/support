@@ -9,13 +9,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.context.expression.MethodBasedEvaluationContext;
-import org.springframework.core.DefaultParameterNameDiscoverer;
-import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.Expression;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
 import org.zkit.support.starter.boot.exception.ResultException;
+import org.zkit.support.starter.boot.utils.SpelExpressionUtils;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -30,8 +26,6 @@ public class DistributedLockAspect {
 
     @Resource
     private RedissonClient redissonClient;
-    private final SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
-    private final DefaultParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
 
     @Pointcut("@annotation(org.zkit.support.starter.redisson.DistributedLock)")
     public void annotationPointCut(){}
@@ -48,7 +42,7 @@ public class DistributedLockAspect {
         String[] lockValues = distributedLock.value();
 
         List<String> lockKeys = Stream.of(lockValues).map(lockValue -> {
-            String lockKey = el ? evaluateExpression(lockValue, joinPoint) : lockValue;
+            String lockKey = el ? SpelExpressionUtils.evaluateExpression(lockValue, joinPoint, String.class) : lockValue;
             return "lock:"+lockKey;
         }).toList();
         log.info("Lock keys: {}", lockKeys);
@@ -75,19 +69,6 @@ public class DistributedLockAspect {
         RLock[] lockArray = locks.toArray(new RLock[0]);
         log.info("Get multi lock: {}", Arrays.toString(lockArray));
         return redissonClient.getMultiLock(lockArray);
-    }
-
-    private String evaluateExpression(String expression, ProceedingJoinPoint point) {
-        // 获取目标对象
-        Object target = point.getTarget();
-        // 获取方法参数
-        Object[] args = point.getArgs();
-        MethodSignature methodSignature = (MethodSignature) point.getSignature();
-        Method method = methodSignature.getMethod();
-
-        EvaluationContext context = new MethodBasedEvaluationContext(target, method, args, parameterNameDiscoverer);
-        Expression exp = spelExpressionParser.parseExpression(expression);
-        return exp.getValue(context, String.class);
     }
 
 }
