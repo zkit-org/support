@@ -12,6 +12,8 @@ dependencies-boot:
         - cd boot-dependencies
         - java -version
         - mvn -v
+        - echo $NEXUS_USERNAME
+        - echo $NEXUS_PASSWORD
         - mvn clean deploy -U -s ../settings.xml
 
 dependencies-cloud:
