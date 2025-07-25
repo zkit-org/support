@@ -39,6 +39,7 @@
     "springframework",
     "webflux",
     "xmlunit",
-    "zkit"
+    "zkit",
+    "gson"
   ],
 }
