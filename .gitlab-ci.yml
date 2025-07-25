@@ -12,9 +12,7 @@ dependencies-boot:
         - cd boot-dependencies
         - java -version
         - mvn -v
-        - echo $NEXUS_USERNAME
-        - echo $NEXUS_PASSWORD
-        - mvn clean deploy -U -s ../settings.xml
+        - mvn clean deploy -U -s $CI_PROJECT_DIR/settings.xml
 
 dependencies-cloud:
     stage: prepare
@@ -26,7 +24,7 @@ dependencies-cloud:
         - cd cloud-dependencies
         - java -version
         - mvn -v
-        - mvn clean deploy -U -s ../settings.xml
+        - mvn clean deploy -U -s $CI_PROJECT_DIR/settings.xml
 
 deploy-all:
     stage: deploy
@@ -37,4 +35,4 @@ deploy-all:
     script:
         - java -version
         - mvn -v
-        - mvn clean deploy -U -s settings.xml
+        - mvn clean deploy -U -s $CI_PROJECT_DIR/settings.xml
