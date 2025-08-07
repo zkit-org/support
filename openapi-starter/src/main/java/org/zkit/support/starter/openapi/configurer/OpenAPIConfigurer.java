@@ -1,7 +1,10 @@
 package org.zkit.support.starter.openapi.configurer;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -34,10 +37,34 @@ public class OpenAPIConfigurer {
                 .version(configuration.getVersion());
         OpenAPI openAPI = new OpenAPI();
         openAPI.info(info);
+        
+        // 配置服务器 URL
         if(StringUtils.isNotEmpty(configuration.getServer())) {
             List<Server> servers = List.of(new Server().url(configuration.getServer()));
             openAPI.servers(servers);
         }
+        
+        // 配置安全认证
+        if(configuration.isEnableSecurity()) {
+            // 创建安全组件
+            Components components = new Components();
+            
+            // 添加 Bearer Token 安全方案
+            SecurityScheme bearerAuth = new SecurityScheme()
+                    .type(SecurityScheme.Type.HTTP)
+                    .scheme("bearer")
+                    .bearerFormat(configuration.getBearerFormat())
+                    .description(configuration.getSecuritySchemeDescription());
+            
+            components.addSecuritySchemes(configuration.getSecuritySchemeName(), bearerAuth);
+            openAPI.components(components);
+            
+            // 添加全局安全要求
+            SecurityRequirement securityRequirement = new SecurityRequirement();
+            securityRequirement.addList(configuration.getSecuritySchemeName());
+            openAPI.addSecurityItem(securityRequirement);
+        }
+        
         return openAPI;
     }
 
@@ -52,7 +79,7 @@ public class OpenAPIConfigurer {
             Node document = parser.parse(markdown);
             html = HtmlRenderer.builder().build().render(document);
         }catch (Exception e) {
-            log.warn("getDescription {}", e.getMessage());
+            log.warn("read OPENAPI.md error, {}", e.getMessage());
         }
         if(html == null) {
             return configuration.getDescription();
