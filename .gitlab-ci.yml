@@ -7,7 +7,7 @@ dependencies-boot:
     only:
         - main
     tags:
-        - dev
+        - easykit
     script:
         - cd boot-dependencies
         - java -version
@@ -19,7 +19,7 @@ dependencies-cloud:
     only:
         - main
     tags:
-        - dev
+        - easykit
     script:
         - cd cloud-dependencies
         - java -version
@@ -31,7 +31,7 @@ deploy-all:
     only:
         - main
     tags:
-        - dev
+        - easykit
     script:
         - java -version
         - mvn -v
