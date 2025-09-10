@@ -6,7 +6,7 @@
     <packaging>maven-plugin</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>Mybatis Plus Maven Plugin</name>
-    <url>https://zkit.org</url>
+    <url>https://xyc.plus</url>
 
     <properties>
         <java.version>21</java.version>
@@ -92,17 +92,17 @@
     <repositories>
         <repository>
             <id>easy-kit</id>
-            <url>https://r.zkit.org/repository/maven-public/</url>
+            <url>https://r.xyc.plus/repository/maven-public/</url>
         </repository>
     </repositories>
     <distributionManagement>
         <repository>
             <id>easy-kit</id>
-            <url>https://r.zkit.org/repository/maven-releases/</url>
+            <url>https://r.xyc.plus/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>easy-kit</id>
-            <url>https://r.zkit.org/repository/maven-snapshots/</url>
+            <url>https://r.xyc.plus/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
