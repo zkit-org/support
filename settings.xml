@@ -2,14 +2,14 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
     <servers>
         <server>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <username>${env.NEXUS_USERNAME}</username>
             <password>${env.NEXUS_PASSWORD}</password>
         </server>
     </servers>
     <mirrors>
         <mirror>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <mirrorOf>central</mirrorOf>
             <url>https://r.meta1.top/repository/maven-public/</url>
         </mirror>

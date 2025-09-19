@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.9</version>
+        <version>3.4.10</version>
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -251,17 +251,17 @@
 
     <repositories>
         <repository>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <url>https://r.meta1.top/repository/maven-public/</url>
         </repository>
     </repositories>
     <distributionManagement>
         <repository>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <url>https://r.meta1.top/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <url>https://r.meta1.top/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>

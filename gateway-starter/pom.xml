@@ -66,17 +66,17 @@
 
     <repositories>
         <repository>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <url>https://r.meta1.top/repository/maven-public/</url>
         </repository>
     </repositories>
     <distributionManagement>
         <repository>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <url>https://r.meta1.top/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>easy-kit</id>
+            <id>meta1</id>
             <url>https://r.meta1.top/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
