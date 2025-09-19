@@ -11,7 +11,7 @@
         <mirror>
             <id>easy-kit</id>
             <mirrorOf>central</mirrorOf>
-            <url>https://r.xyc.plus/repository/maven-public/</url>
+            <url>https://r.meta1.top/repository/maven-public/</url>
         </mirror>
     </mirrors>
 </settings>
