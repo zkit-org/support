@@ -3,6 +3,7 @@ package org.zkit.maven.plugin.mybatis.plus;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.logging.Log;
@@ -14,6 +15,8 @@ import org.zkit.maven.plugin.mybatis.plus.entity.Module;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author grant
@@ -64,8 +67,30 @@ public class GeneratorMojo extends AbstractMojo {
                 .packageConfig(builder -> {
                     builder.parent(config.getBasePackage()) // 设置父包名
                             .moduleName(module.getName()) // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, basedir + "/" + config.getMapperPackage() + "/" + module.getName())); // 设置mapperXml生成路径
+                            .mapper("mapper.base") // 设置 Mapper 生成到 base 子包
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, basedir + "/" + config.getMapperPackage() + "/" + module.getName() + "/base")); // 设置mapperXml生成到配置的mapper目录/base
                     builder.entity("entity.dto");
+                })
+                .injectionConfig(injectConfig -> {
+                    // 添加自定义属性，可以在模板中使用
+                    Map<String, Object> customMap = new HashMap<>();
+                    customMap.put("moduleName", module.getName());
+                    customMap.put("basePackage", config.getBasePackage());
+                    injectConfig.customMap(customMap);
+                    
+                    // 生成扩展的 XXMapper.java 文件（继承 base.XXMapper）
+                    injectConfig.customFile(new CustomFile.Builder()
+                            .fileName("Mapper.java") // 文件名，会变成 AccountMapper.java
+                            .templatePath("templates/custom-mapper.java.ftl") // Java 接口模板
+                            .packageName("mapper") // 放在 mapper 包下
+                            .build());
+                    
+                    // 生成扩展的 XXMapper.xml 文件
+                    injectConfig.customFile(new CustomFile.Builder()
+                            .fileName("Mapper.xml") // 文件名，会变成 AccountMapper.xml
+                            .templatePath("templates/custom-mapper.xml.ftl") // 自定义模板路径
+                            .filePath(basedir + "/" + config.getMapperPackage() + "/" + module.getName()) // 使用配置的mapper路径
+                            .build());
                 })
                 .strategyConfig(builder -> {
                     builder.entityBuilder()
@@ -75,8 +100,11 @@ public class GeneratorMojo extends AbstractMojo {
                     builder.serviceBuilder().formatServiceFileName("%sService");
                     builder.controllerBuilder().enableRestStyle();
                     builder.mapperBuilder()
+                            .enableFileOverride()
                             .enableBaseColumnList()
-                            .enableBaseResultMap();
+                            .enableBaseResultMap()
+                            .formatXmlFileName("%sBaseMapper")
+                            .formatMapperFileName("%sBaseMapper"); // 设置 XML 文件名格式为 XXBaseMapper.xml
                     String[] tables = module.getTables();
                     builder.addInclude(tables); // 设置需要生成的表名
                 })
