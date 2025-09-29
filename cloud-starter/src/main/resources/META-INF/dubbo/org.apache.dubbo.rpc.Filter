@@ -1,2 +1,0 @@
-support-exception=org.zkit.support.starter.cloud.filter.DubboExceptionFilter
-support-language=org.zkit.support.starter.cloud.filter.DubboLanguageFilter

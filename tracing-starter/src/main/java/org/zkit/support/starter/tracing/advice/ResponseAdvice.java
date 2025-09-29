@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.springframework.http.converter.HttpMessageConverter;
 
-import static org.zkit.support.starter.tracing.TracingConst.*;
+import static org.zkit.support.starter.boot.cost.TracingConst.*;
 
 @ControllerAdvice
 @Slf4j

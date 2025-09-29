@@ -1,4 +1,4 @@
-package org.zkit.support.starter.tracing;
+package org.zkit.support.starter.boot.cost;
 
 public class TracingConst {
 

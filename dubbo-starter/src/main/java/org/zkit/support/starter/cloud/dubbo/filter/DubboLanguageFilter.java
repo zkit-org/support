@@ -1,4 +1,4 @@
-package org.zkit.support.starter.cloud.filter;
+package org.zkit.support.starter.cloud.dubbo.filter;
 
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.Filter;
